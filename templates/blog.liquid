@@ -1,0 +1,15 @@
+<div class="page-narrow">
+  <h1>{{ blog.title }}</h1>
+  <ul class="card-list" style="margin-top:28px;">
+    {%- for article in blog.articles -%}
+      <li class="cart-line">
+        <div class="cl-meta">
+          <a href="{{ article.url }}" style="font-weight:600;">{{ article.title }}</a>
+          <div class="field-help">{{ article.published_at | date: '%-d %B %Y' }}</div>
+        </div>
+      </li>
+    {%- else -%}
+      <li class="rte">Inga inlägg ännu.</li>
+    {%- endfor -%}
+  </ul>
+</div>

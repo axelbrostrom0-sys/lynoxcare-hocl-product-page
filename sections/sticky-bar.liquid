@@ -1,0 +1,23 @@
+<div class="stickybar">
+  <div class="sb-info">
+    <span class="sb-name">{{ product.title | default: 'Skin Revival Spray' }}</span>
+    <span class="sb-price" data-sticky-price>
+      {%- if product -%}{{ product.selected_or_first_available_variant.price | money }}{%- else -%}379 kr{%- endif -%}
+    </span>
+  </div>
+  {%- if product and product.available -%}
+    <a class="btn" href="#product-form" onclick="document.querySelector('#product-form [name=add]').click();return false;">Lägg i varukorg</a>
+  {%- else -%}
+    <a class="btn" href="{{ section.settings.cta_url | default: 'https://www.lynoxcare.store/products/skin-revival-spray' }}">Lägg i varukorg</a>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Sticky köp-bar",
+  "settings": [
+    { "type": "url", "id": "cta_url", "label": "Reserv-länk", "default": "https://www.lynoxcare.store/products/skin-revival-spray" }
+  ],
+  "presets": [ { "name": "Sticky köp-bar" } ]
+}
+{% endschema %}

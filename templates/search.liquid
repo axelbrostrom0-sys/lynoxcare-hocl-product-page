@@ -1,0 +1,22 @@
+<div class="page-narrow">
+  <h1>Sök</h1>
+  <form action="{{ routes.search_url }}" method="get" role="search">
+    <div class="form-row">
+      <label for="q">Sökord</label>
+      <input type="search" id="q" name="q" value="{{ search.terms | escape }}" placeholder="Sök">
+    </div>
+    <button type="submit" class="btn" style="max-width:200px;">Sök</button>
+  </form>
+
+  {%- if search.performed -%}
+    <ul class="card-list" style="margin-top:28px;">
+      {%- for item in search.results -%}
+        <li class="cart-line">
+          <div class="cl-meta"><a href="{{ item.url }}" style="font-weight:600;">{{ item.title }}</a></div>
+        </li>
+      {%- else -%}
+        <li class="rte">Inga resultat hittades.</li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+</div>

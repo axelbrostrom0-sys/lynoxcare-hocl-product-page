@@ -1,0 +1,10 @@
+<div class="page-narrow" style="text-align:center;">
+  <div class="brand" style="margin-bottom:16px;">{{ shop.name | default: 'LYNOXCARE' }}</div>
+  <h1>Presentkort</h1>
+  <p class="rte">Värde: {{ gift_card.initial_value | money }}</p>
+  {%- if gift_card.qr_identifier -%}
+    <img src="{{ gift_card.qr_identifier }}" alt="Presentkortskod" width="120" height="120" style="margin:24px auto;">
+  {%- endif -%}
+  <p style="font-size:22px;font-weight:600;letter-spacing:.08em;">{{ gift_card.code | format_code }}</p>
+  <p class="field-help">Saldo: {{ gift_card.balance | money }}</p>
+</div>

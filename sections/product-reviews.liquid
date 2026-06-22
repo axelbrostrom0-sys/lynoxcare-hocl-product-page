@@ -1,0 +1,78 @@
+<section class="block" id="recensioner">
+  <div class="wrap">
+    <div class="rev-head">
+      <div class="rev-score">
+        {% render 'stars', rating: section.settings.rating %}
+        <span class="big">{{ section.settings.rating }}</span>
+        <span class="sub">Baserat på {{ section.settings.reviews_count }} verifierade omdömen</span>
+      </div>
+      <div class="bars">
+        {%- assign dist = section.settings.distribution | split: ',' -%}
+        {%- assign labels = '5,4,3,2,1' | split: ',' -%}
+        {%- for pct in dist -%}
+          <div class="bar-row">
+            <span class="lbl">{{ labels[forloop.index0] }}<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg></span>
+            <span class="bar-track"><span class="bar-fill" style="width:{{ pct | strip }}%"></span></span>
+            <span class="pct">{{ pct | strip }}%</span>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <p class="repurchase"><strong>{{ section.settings.repurchase }}</strong></p>
+
+    <div class="rev-grid">
+      {%- for block in section.blocks -%}
+        <div class="rev-card" {{ block.shopify_attributes }}>
+          <div class="rc-top">
+            <span class="rc-name">{{ block.settings.name }}</span>
+            <span class="verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>Verifierad köpare</span>
+          </div>
+          {% render 'stars', rating: section.settings.rating %}
+          <span class="rc-title">{{ block.settings.title }}</span>
+          <p class="rc-body">{{ block.settings.body }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="midcta" style="margin-top:40px;">
+      <a class="btn btn-lg" href="{{ section.settings.cta_url | default: 'https://www.lynoxcare.store/products/skin-revival-spray' }}">{{ section.settings.cta_label }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Recensioner",
+  "settings": [
+    { "type": "text", "id": "rating", "label": "Snittbetyg", "default": "4,9" },
+    { "type": "text", "id": "reviews_count", "label": "Antal omdömen", "default": "1 422" },
+    { "type": "text", "id": "distribution", "label": "Fördelning 5,4,3,2,1 (procent)", "default": "92,5,2,1,0" },
+    { "type": "text", "id": "repurchase", "label": "Återköpsrad", "default": "85% av kunderna köper Skin Revival Spray igen." },
+    { "type": "text", "id": "cta_label", "label": "Knapptext", "default": "Lägg i varukorg" },
+    { "type": "url", "id": "cta_url", "label": "Knapplänk", "default": "https://www.lynoxcare.store/products/skin-revival-spray" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Omdöme",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Namn", "default": "Johanna L." },
+        { "type": "text", "id": "title", "label": "Rubrik", "default": "Rodnaden lägger sig direkt" },
+        { "type": "textarea", "id": "body", "label": "Text", "default": "Min hud blir röd av minsta lilla. Efter en spray är det lugnt igen på under en minut. Inget som svider, ingen parfym. Jag är fast." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Recensioner",
+      "blocks": [
+        { "type": "review", "settings": { "name": "Johanna L.", "title": "Rodnaden lägger sig direkt", "body": "Min hud blir röd av minsta lilla. Efter en spray är det lugnt igen på under en minut. Inget som svider, ingen parfym. Jag är fast." } },
+        { "type": "review", "settings": { "name": "Marcus H.", "title": "Perfekt efter rakningen", "body": "Brukade få röda utslag varje gång jag rakade mig. Nu sprayar jag direkt efter och huden är lugn. Enkelt och det luktar ingenting." } },
+        { "type": "review", "settings": { "name": "Elin S.", "title": "Äntligen något för känslig hud", "body": "Har testat allt för min reaktiva hud och det mesta gör det värre. Det här gör tvärtom. Lugnt, svalt och inget som torkar ut." } },
+        { "type": "review", "settings": { "name": "Sara K.", "title": "Köpt tre flaskor redan", "body": "Använder den efter gymmet när jag är röd och svettig i ansiktet. Lugnar direkt. Har redan köpt om två gånger och prenumererar nu." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

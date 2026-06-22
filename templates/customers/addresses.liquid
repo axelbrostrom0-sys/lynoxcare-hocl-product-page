@@ -1,0 +1,29 @@
+<div class="page-narrow">
+  <h1>Dina adresser</h1>
+  <p style="margin-bottom:24px;"><a href="{{ routes.account_url }}" style="color:var(--blue);">Tillbaka till kontot</a></p>
+
+  <ul class="card-list">
+    {%- for address in customer.addresses -%}
+      <li class="cart-line">
+        <div class="cl-meta">
+          <div>{{ address.first_name }} {{ address.last_name }}</div>
+          <div class="field-help">{{ address.street }}, {{ address.zip }} {{ address.city }}, {{ address.country }}</div>
+        </div>
+      </li>
+    {%- else -%}
+      <li class="rte">Inga sparade adresser.</li>
+    {%- endfor -%}
+  </ul>
+
+  <h2 style="font-size:20px;margin:32px 0 12px;">Lägg till adress</h2>
+  {%- form 'customer_address', customer.new_address -%}
+    {{ form.errors | default_errors }}
+    <div class="form-row"><label for="a-first">Förnamn</label><input type="text" id="a-first" name="address[first_name]"></div>
+    <div class="form-row"><label for="a-last">Efternamn</label><input type="text" id="a-last" name="address[last_name]"></div>
+    <div class="form-row"><label for="a-street">Adress</label><input type="text" id="a-street" name="address[address1]"></div>
+    <div class="form-row"><label for="a-zip">Postnummer</label><input type="text" id="a-zip" name="address[zip]"></div>
+    <div class="form-row"><label for="a-city">Stad</label><input type="text" id="a-city" name="address[city]"></div>
+    <div class="form-row"><label for="a-country">Land</label><input type="text" id="a-country" name="address[country]"></div>
+    <button type="submit" class="btn" style="max-width:240px;">Spara adress</button>
+  {%- endform -%}
+</div>

@@ -1,0 +1,31 @@
+<div class="page-narrow">
+  <h1>Varukorg</h1>
+
+  {%- if cart.item_count == 0 -%}
+    <p class="rte">Din varukorg är tom.</p>
+    <a class="btn btn-lg" style="max-width:280px;margin-top:24px;" href="{{ routes.all_products_collection_url }}">Fortsätt handla</a>
+  {%- else -%}
+    <form action="{{ routes.cart_url }}" method="post" novalidate>
+      <ul class="card-list">
+        {%- for item in cart.items -%}
+          <li class="cart-line">
+            <div class="cl-img">
+              {%- if item.image -%}<img src="{{ item.image | image_url: width: 144 }}" alt="{{ item.title | escape }}" width="72" height="72">{%- endif -%}
+            </div>
+            <div class="cl-meta">
+              <a href="{{ item.url }}" style="font-weight:600;">{{ item.product.title }}</a>
+              {%- unless item.variant.title contains 'Default' -%}<div class="field-help">{{ item.variant.title }}</div>{%- endunless -%}
+              <div class="field-help">Antal: {{ item.quantity }}</div>
+            </div>
+            <div style="font-weight:600;">{{ item.final_line_price | money }}</div>
+          </li>
+        {%- endfor -%}
+      </ul>
+
+      <div class="cart-foot">
+        <div style="font-size:18px;font-weight:600;">Delsumma: {{ cart.total_price | money }}</div>
+        <button type="submit" name="checkout" class="btn btn-lg" style="max-width:280px;">Till kassan</button>
+      </div>
+    </form>
+  {%- endif -%}
+</div>

@@ -1,0 +1,14 @@
+<div class="page-narrow">
+  <h1>Kollektioner</h1>
+  <ul class="card-list" style="margin-top:28px;">
+    {%- for collection in collections -%}
+      <li class="cart-line">
+        <div class="cl-meta">
+          <a href="{{ collection.url }}" style="font-weight:600;">{{ collection.title }}</a>
+        </div>
+      </li>
+    {%- else -%}
+      <li class="rte">Inga kollektioner ännu.</li>
+    {%- endfor -%}
+  </ul>
+</div>

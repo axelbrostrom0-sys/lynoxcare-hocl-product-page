@@ -1,0 +1,30 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product"
+    },
+    "mechanism": {
+      "type": "mechanism"
+    },
+    "belief_safety": {
+      "type": "belief-safety"
+    },
+    "belief_cost": {
+      "type": "belief-cost"
+    },
+    "reviews": {
+      "type": "product-reviews",
+      "blocks": {
+        "r1": { "type": "review", "settings": { "name": "Johanna L.", "title": "Rodnaden lägger sig direkt", "body": "Min hud blir röd av minsta lilla. Efter en spray är det lugnt igen på under en minut. Inget som svider, ingen parfym. Jag är fast." } },
+        "r2": { "type": "review", "settings": { "name": "Marcus H.", "title": "Perfekt efter rakningen", "body": "Brukade få röda utslag varje gång jag rakade mig. Nu sprayar jag direkt efter och huden är lugn. Enkelt och det luktar ingenting." } },
+        "r3": { "type": "review", "settings": { "name": "Elin S.", "title": "Äntligen något för känslig hud", "body": "Har testat allt för min reaktiva hud och det mesta gör det värre. Det här gör tvärtom. Lugnt, svalt och inget som torkar ut." } },
+        "r4": { "type": "review", "settings": { "name": "Sara K.", "title": "Köpt tre flaskor redan", "body": "Använder den efter gymmet när jag är röd och svettig i ansiktet. Lugnar direkt. Har redan köpt om två gånger och prenumererar nu." } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4"]
+    },
+    "sticky": {
+      "type": "sticky-bar"
+    }
+  },
+  "order": ["main", "mechanism", "belief_safety", "belief_cost", "reviews", "sticky"]
+}

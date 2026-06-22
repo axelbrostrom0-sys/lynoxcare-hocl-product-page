@@ -1,0 +1,215 @@
+{%- liquid
+  assign rating = section.settings.rating | default: '4,9'
+  assign reviews_count = section.settings.reviews_count | default: '1 422'
+  assign fallback_url = section.settings.fallback_url
+-%}
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+
+      {%- comment -%} Left: gallery {%- endcomment -%}
+      <div class="gallery">
+        {%- if product.media.size > 0 -%}
+          {%- assign first = product.featured_media | default: product.media.first -%}
+          <div class="ph ph-main" data-gallery-main>
+            <img src="{{ first | image_url: width: 900 }}" alt="{{ first.alt | escape | default: product.title }}" width="900" height="900" loading="eager">
+          </div>
+          <div class="thumbs">
+            {%- for media in product.media limit: 5 -%}
+              <div class="ph ph-thumb" data-gallery-thumb data-src="{{ media | image_url: width: 900 }}" data-alt="{{ media.alt | escape }}">
+                <img src="{{ media | image_url: width: 300 }}" alt="{{ media.alt | escape }}" width="300" height="300" loading="lazy">
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- else -%}
+          <div class="ph ph-main is-empty">
+            <span class="ph-title">Skin Revival Spray, flaska rakt framifrån</span>
+            <span class="ph-type">Produktbild</span>
+          </div>
+          <div class="thumbs">
+            <div class="ph ph-thumb is-empty"><span class="ph-title">Spray i bruk</span><span class="ph-type">Livsstil</span></div>
+            <div class="ph ph-thumb is-empty"><span class="ph-title">Före och efter</span><span class="ph-type">Resultat</span></div>
+            <div class="ph ph-thumb is-empty"><span class="ph-title">Ingrediens HOCl</span><span class="ph-type">Närbild</span></div>
+            <div class="ph ph-thumb is-empty"><span class="ph-title">Flaska i hand</span><span class="ph-type">Skala</span></div>
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Right: buy box {%- endcomment -%}
+      <div class="buybox">
+
+        {%- comment -%} Trust row ABOVE the title {%- endcomment -%}
+        <div class="trust-row">
+          {% render 'stars', rating: rating %}
+          <span>{{ rating }} ({{ reviews_count }} omdömen)</span>
+        </div>
+
+        <h1>{{ product.title | default: 'Skin Revival Spray' }}</h1>
+
+        <p class="subtitle">{{ section.settings.subtitle }}</p>
+
+        <div class="price" data-price>
+          {%- if product -%}
+            {{ product.selected_or_first_available_variant.price | money }}
+            {%- if product.compare_at_price_max > product.price -%}
+              <span class="compare">{{ product.compare_at_price_max | money }}</span>
+            {%- endif -%}
+          {%- else -%}
+            379 kr
+          {%- endif -%}
+        </div>
+
+        {%- if product and product.available -%}
+          {%- form 'product', product, id: 'product-form' -%}
+            <div class="options">
+              <span class="opt-label">Välj alternativ</span>
+              <div class="opt-grid">
+                {%- for variant in product.variants -%}
+                  <label class="opt {% if variant == product.selected_or_first_available_variant %}active{% endif %}"
+                         data-option
+                         data-variant="{{ variant.id }}"
+                         data-price-text="{{ variant.price | money }}">
+                    <input type="radio" name="id" value="{{ variant.id }}"
+                           {% if variant == product.selected_or_first_available_variant %}checked{% endif %}
+                           {% unless variant.available %}disabled{% endunless %}
+                           data-variant-id>
+                    <span class="opt-name">{{ variant.title }}</span>
+                    <span class="opt-sub">{{ variant.price | money }}</span>
+                  </label>
+                {%- endfor -%}
+              </div>
+            </div>
+
+            <button type="submit" name="add" class="btn btn-lg" style="margin-top:18px;">
+              Lägg i varukorg
+            </button>
+          {%- endform -%}
+        {%- else -%}
+          {%- comment -%} Onboarding / no product assigned: static design with link CTA {%- endcomment -%}
+          <div class="options">
+            <span class="opt-label">Välj alternativ</span>
+            <div class="opt-grid">
+              <label class="opt active" data-option data-price-text="379 kr">
+                <input type="radio" name="plan" checked>
+                <span class="opt-name">1 flaska</span>
+                <span class="opt-sub">379 kr</span>
+              </label>
+              <label class="opt" data-option data-price-text="682 kr">
+                <input type="radio" name="plan">
+                <span class="opt-name">Dubbelpack</span>
+                <span class="opt-sub">682 kr</span>
+              </label>
+              <label class="opt" data-option data-price-text="303 kr">
+                <input type="radio" name="plan">
+                <span class="opt-name">Prenumeration</span>
+                <span class="opt-sub">spara 20%</span>
+              </label>
+            </div>
+          </div>
+          <a class="btn btn-lg" style="margin-top:18px;" href="{{ fallback_url | default: 'https://www.lynoxcare.store/products/skin-revival-spray' }}">Lägg i varukorg</a>
+        {%- endif -%}
+
+        {%- comment -%} Trust icons under the button {%- endcomment -%}
+        <div class="under-cta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Fri frakt</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg> 30 dagars retur</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Parfymfri</span>
+        </div>
+
+        <p class="klarna">Dela upp betalningen i 3 räntefria delar med Klarna.</p>
+
+        {%- comment -%} Icon benefits: 6 in 2 columns {%- endcomment -%}
+        <div class="benefits">
+          <div class="benefit"><span class="b-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg></span>Lugnar rodnad</div>
+          <div class="benefit"><span class="b-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Parfymfri</div>
+          <div class="benefit"><span class="b-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Alkoholfri</div>
+          <div class="benefit"><span class="b-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg></span>För känslig hud</div>
+          <div class="benefit"><span class="b-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg></span>pH 4,5 till 5,5</div>
+          <div class="benefit"><span class="b-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Märks på 60 sekunder</div>
+        </div>
+
+        {%- comment -%} Accordions {%- endcomment -%}
+        <div class="accordions">
+          <details open>
+            <summary>Berätta mer <span class="plus">+</span></summary>
+            <div class="acc-body">
+              {%- if product.description != blank -%}
+                {{ product.description }}
+              {%- else -%}
+                <p>Skin Revival Spray är en lätt mist som lugnar röd och reaktiv hud direkt. Den bygger på hypoklorsyra (HOCl), samma molekyl som kroppens egna vita blodkroppar tillverkar. Spraya efter rakning, efter gymmet, efter rengöring eller när som helst huden känns irriterad.</p>
+                <ul>
+                  <li>118 ml i en återförslutbar sprayflaska</li>
+                  <li>pH 4,5 till 5,5, anpassat efter hudens egen barriär</li>
+                  <li>Alkoholfri, parfymfri och parabenfri</li>
+                </ul>
+              {%- endif -%}
+            </div>
+          </details>
+          <details>
+            <summary>Ingredienser <span class="plus">+</span></summary>
+            <div class="acc-body">
+              <p>{{ section.settings.ingredients }}</p>
+            </div>
+          </details>
+          <details>
+            <summary>Så använder du den <span class="plus">+</span></summary>
+            <div class="acc-body">
+              <p>{{ section.settings.how_to_use }}</p>
+            </div>
+          </details>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Produkt: köp-box",
+  "settings": [
+    {
+      "type": "text",
+      "id": "rating",
+      "label": "Betyg",
+      "default": "4,9"
+    },
+    {
+      "type": "text",
+      "id": "reviews_count",
+      "label": "Antal omdömen",
+      "default": "1 422"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Underrubrik",
+      "default": "Lugnar röd, reaktiv hud på 60 sekunder. Återställer huden utan att torka ut den, helt parfymfritt."
+    },
+    {
+      "type": "textarea",
+      "id": "ingredients",
+      "label": "Ingredienser",
+      "default": "Aqua (vatten), natriumhypoklorit, hypoklorsyra (HOCl), natriumklorid. Det är hela listan. Ingen parfym, ingen alkohol, inga syror och inga parabener."
+    },
+    {
+      "type": "textarea",
+      "id": "how_to_use",
+      "label": "Så använder du den",
+      "default": "Håll flaskan cirka 15 cm från ansiktet och spraya ett jämnt lager på ren hud. Låt lufttorka, ingen avsköljning behövs. Använd morgon och kväll eller vid behov under dagen. Kan användas under serum, kräm och smink."
+    },
+    {
+      "type": "url",
+      "id": "fallback_url",
+      "label": "Reserv-länk för köp (om ingen produkt valts)",
+      "default": "https://www.lynoxcare.store/products/skin-revival-spray"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Produkt: köp-box"
+    }
+  ]
+}
+{% endschema %}

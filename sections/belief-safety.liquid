@@ -1,0 +1,26 @@
+<section class="block belief" id="trygghet">
+  <div class="wrap narrow">
+    <h2>{{ section.settings.heading }}</h2>
+    <p class="lead">{{ section.settings.lead }}</p>
+    <p>{{ section.settings.body1 }}</p>
+    <p>{{ section.settings.body2 }}</p>
+    <div class="proof">
+      <strong>{{ section.settings.proof_strong }}</strong> {{ section.settings.proof_rest }}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Belief: trygghet",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Rubrik", "default": "Tänk om huden reagerar igen?" },
+    { "type": "textarea", "id": "lead", "label": "Ingress", "default": "Din största rädsla är inte att det inte funkar. Det är att det ska göra ont igen." },
+    { "type": "textarea", "id": "body1", "label": "Brödtext 1", "default": "En till rodnad. En till vecka med utbrott. En till flaska som hamnar i lådan. Du är skeptisk, och det borde du vara." },
+    { "type": "textarea", "id": "body2", "label": "Brödtext 2", "default": "Därför är sprayen gjord på bara en molekyl: hypoklorsyra, den din kropp redan tillverkar själv. Du kan inte vara allergisk mot något kroppen redan gör. Ingen parfym, ingen alkohol, inga syror." },
+    { "type": "text", "id": "proof_strong", "label": "Bevis (fet del)", "default": "85% av kunderna köper den igen." },
+    { "type": "text", "id": "proof_rest", "label": "Bevis (resten)", "default": "4,9 i snitt över 1 422 verifierade omdömen." }
+  ],
+  "presets": [ { "name": "Belief: trygghet" } ]
+}
+{% endschema %}

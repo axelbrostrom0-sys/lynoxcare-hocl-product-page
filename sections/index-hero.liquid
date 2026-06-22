@@ -1,0 +1,20 @@
+<section class="index-hero">
+  <div class="eyebrow" style="display:flex;justify-content:center;">{{ section.settings.eyebrow }}</div>
+  <h1>{{ section.settings.heading }}</h1>
+  <p>{{ section.settings.body }}</p>
+  <a class="btn btn-lg" href="{{ section.settings.cta_url | default: 'https://www.lynoxcare.store/products/skin-revival-spray' }}">{{ section.settings.cta_label }}</a>
+</section>
+
+{% schema %}
+{
+  "name": "Startsida: hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Etikett", "default": "Lugnar känslig hud" },
+    { "type": "text", "id": "heading", "label": "Rubrik", "default": "Skin Revival Spray" },
+    { "type": "textarea", "id": "body", "label": "Brödtext", "default": "Lugnar röd, reaktiv hud på 60 sekunder utan att torka ut. Hypoklorsyra, parfymfritt och alkoholfritt." },
+    { "type": "text", "id": "cta_label", "label": "Knapptext", "default": "Handla nu" },
+    { "type": "url", "id": "cta_url", "label": "Knapplänk", "default": "https://www.lynoxcare.store/products/skin-revival-spray" }
+  ],
+  "presets": [ { "name": "Startsida: hero" } ]
+}
+{% endschema %}

@@ -1,0 +1,19 @@
+<div class="page-narrow">
+  <h1>{{ collection.title }}</h1>
+  {%- if collection.description != blank -%}<div class="rte">{{ collection.description }}</div>{%- endif -%}
+  <ul class="card-list" style="margin-top:28px;">
+    {%- for product in collection.products -%}
+      <li class="cart-line">
+        <div class="cl-img">
+          {%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 144 }}" alt="{{ product.title | escape }}" width="72" height="72">{%- endif -%}
+        </div>
+        <div class="cl-meta">
+          <a href="{{ product.url }}" style="font-weight:600;">{{ product.title }}</a>
+          <div class="field-help">{{ product.price | money }}</div>
+        </div>
+      </li>
+    {%- else -%}
+      <li class="rte">Inga produkter ännu.</li>
+    {%- endfor -%}
+  </ul>
+</div>

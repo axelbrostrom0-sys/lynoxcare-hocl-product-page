@@ -1,0 +1,42 @@
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">{{ section.settings.wordmark | default: 'LYNOXCARE' }}</div>
+      <nav class="foot-links">
+        {%- for link in section.settings.menu.links -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- else -%}
+          <a href="{{ routes.root_url }}#mekanism">Om HOCl</a>
+          <a href="{{ routes.root_url }}#recensioner">Recensioner</a>
+          <a href="{{ routes.root_url }}#trygghet">Trygghet</a>
+        {%- endfor -%}
+      </nav>
+    </div>
+    <p class="foot-legal">{{ section.settings.legal }}</p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Sidfot",
+  "settings": [
+    {
+      "type": "text",
+      "id": "wordmark",
+      "label": "Ordmärke",
+      "default": "LYNOXCARE"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Meny"
+    },
+    {
+      "type": "text",
+      "id": "legal",
+      "label": "Juridisk rad",
+      "default": "© 2026 LynoxCare. Alla rättigheter förbehållna. Skin Revival Spray, 118 ml. Hypoklorsyra (HOCl). pH 4,5 till 5,5."
+    }
+  ]
+}
+{% endschema %}

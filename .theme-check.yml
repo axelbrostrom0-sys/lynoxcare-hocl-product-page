@@ -1,0 +1,7 @@
+# Theme Check configuration for the LynoxCare theme.
+root: "."
+
+# Inter is loaded from Google Fonts on purpose to match the LynoxCare brand,
+# so the RemoteAsset best-practice rule is disabled intentionally.
+RemoteAsset:
+  enabled: false

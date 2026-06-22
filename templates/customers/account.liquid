@@ -1,0 +1,20 @@
+<div class="page-narrow">
+  <h1>Mitt konto</h1>
+  <p class="field-help">{{ customer.name }} &middot; <a href="{{ routes.account_logout_url }}" style="color:var(--blue);">Logga ut</a></p>
+
+  <h2 style="font-size:20px;margin:32px 0 12px;">Orderhistorik</h2>
+  <ul class="card-list">
+    {%- for order in customer.orders -%}
+      <li class="cart-line">
+        <div class="cl-meta">
+          <a href="{{ order.customer_url }}" style="font-weight:600;">Order {{ order.name }}</a>
+          <div class="field-help">{{ order.created_at | date: '%-d %B %Y' }} &middot; {{ order.total_price | money }}</div>
+        </div>
+      </li>
+    {%- else -%}
+      <li class="rte">Inga ordrar ännu.</li>
+    {%- endfor -%}
+  </ul>
+
+  <p style="margin-top:24px;"><a href="{{ routes.account_addresses_url }}" style="color:var(--blue);">Hantera adresser</a></p>
+</div>

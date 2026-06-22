@@ -1,0 +1,20 @@
+<div class="page-narrow">
+  <h1>Order {{ order.name }}</h1>
+  <p class="field-help">{{ order.created_at | date: '%-d %B %Y' }}</p>
+
+  <ul class="card-list" style="margin-top:24px;">
+    {%- for line in order.line_items -%}
+      <li class="cart-line">
+        <div class="cl-meta">
+          <span style="font-weight:600;">{{ line.title }}</span>
+          <div class="field-help">Antal: {{ line.quantity }}</div>
+        </div>
+        <div style="font-weight:600;">{{ line.final_line_price | money }}</div>
+      </li>
+    {%- endfor -%}
+  </ul>
+
+  <div class="cart-foot">
+    <div style="font-size:18px;font-weight:600;">Totalt: {{ order.total_price | money }}</div>
+  </div>
+</div>

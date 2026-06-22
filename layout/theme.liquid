@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="{{ settings.color_accent | default: '#141414' }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+  {%- endif -%}
+
+  <title>
+    {{ page_title }}{% if current_tags %} &middot; {{ current_tags | join: ', ' }}{% endif %}{% if current_page != 1 %} &middot; {{ 'general.page' | t: page: current_page }}{% endif %}
+    {%- unless page_title contains shop.name %} &middot; {{ shop.name }}{% endunless -%}
+  </title>
+
+  {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  {%- style -%}
+    :root{
+      --bg: {{ settings.color_bg | default: '#FFFFFF' }};
+      --text: {{ settings.color_text | default: '#141414' }};
+      --muted: {{ settings.color_muted | default: '#6E6E6E' }};
+      --line: {{ settings.color_line | default: '#E7E4DF' }};
+      --accent: {{ settings.color_accent | default: '#141414' }};
+      --cream: {{ settings.color_cream | default: '#F3EEE8' }};
+      --blue: {{ settings.color_blue | default: '#2D9CDB' }};
+      --radius: {{ settings.image_radius | default: 16 }}px;
+      --maxw: {{ settings.page_width | default: 1120 }}px;
+    }
+  {%- endstyle -%}
+
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+
+  {{ content_for_header }}
+</head>
+<body class="template-{{ request.page_type | handle }}">
+
+  {% section 'announcement-bar' %}
+  {% section 'header' %}
+
+  <main id="main-content" role="main">
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'footer' %}
+
+</body>
+</html>

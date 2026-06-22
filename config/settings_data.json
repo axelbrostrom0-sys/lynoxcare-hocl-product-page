@@ -1,0 +1,26 @@
+{
+  "current": {
+    "color_bg": "#FFFFFF",
+    "color_text": "#141414",
+    "color_muted": "#6E6E6E",
+    "color_line": "#E7E4DF",
+    "color_accent": "#141414",
+    "color_cream": "#F3EEE8",
+    "color_blue": "#2D9CDB",
+    "page_width": 1120,
+    "image_radius": 16
+  },
+  "presets": {
+    "LynoxCare": {
+      "color_bg": "#FFFFFF",
+      "color_text": "#141414",
+      "color_muted": "#6E6E6E",
+      "color_line": "#E7E4DF",
+      "color_accent": "#141414",
+      "color_cream": "#F3EEE8",
+      "color_blue": "#2D9CDB",
+      "page_width": 1120,
+      "image_radius": 16
+    }
+  }
+}
