@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "color_bg": "#FFFFFF",
@@ -8,7 +17,31 @@
     "color_cream": "#F3EEE8",
     "color_blue": "#2D9CDB",
     "page_width": 1120,
-    "image_radius": 16
+    "image_radius": 16,
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {
+          "text": "Fri frakt · 30 dagars öppet köp"
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "wordmark": "LYNOXCARE",
+          "menu": "main-menu"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "wordmark": "LYNOXCARE",
+          "menu": "",
+          "legal": "© 2026 LynoxCare. Alla rättigheter förbehållna. Skin Revival Spray, 118 ml. Hypoklorsyra (HOCl). pH 4,5 till 5,5."
+        }
+      }
+    },
+    "content_for_index": []
   },
   "presets": {
     "LynoxCare": {
